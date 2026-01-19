@@ -27,7 +27,7 @@ var upload = document.querySelector(".upload");
 
 var imageInput = document.createElement("input");
 imageInput.type = "file";
-imageInput.accept = ".jpeg,.png,.gif";
+imageInput.accept = ".jpeg,.jpg,.png,.gif";
 
 document.querySelectorAll(".input_holder").forEach((element) => {
 
@@ -54,7 +54,7 @@ imageInput.addEventListener('change', (event) => {
     var data = new FormData();
     data.append("image", file);
 
-    fetch('	https://api.imgur.com/3/image' ,{
+    fetch('https://api.imgur.com/3/image', {
         method: 'POST',
         headers: {
             'Authorization': 'Client-ID c8c28d402435402'
@@ -72,6 +72,10 @@ imageInput.addEventListener('change', (event) => {
         upload.querySelector(".upload_uploaded").src = url;
 
     })
+    .catch(() => {
+        upload.classList.add("error_shown");
+        upload.classList.remove("upload_loading");
+    });
 
 })
 
